@@ -9,10 +9,16 @@ import org.springframework.data.redis.cache.RedisCacheManager
 import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
+import org.springframework.web.client.RestTemplate
 
 @EnableCaching
 @SpringBootApplication
 class ApiSecurityApplication {
+
+    @Bean
+    RestTemplate restTemplate() {
+        new RestTemplate()
+    }
 
     @Bean
     CacheManager cacheManager(RedisConnectionFactory factory) {
@@ -21,7 +27,7 @@ class ApiSecurityApplication {
         new RedisCacheManager(template)
     }
 
-	static void main(String[] args) {
-		SpringApplication.run ApiSecurityApplication, args
-	}
+    static void main(String[] args) {
+        SpringApplication.run ApiSecurityApplication, args
+    }
 }
